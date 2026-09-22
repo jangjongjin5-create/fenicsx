@@ -28,24 +28,14 @@ This project builds a **Physics-Guided Digital Twin for Atomic Layer Deposition 
 
 ##  System Architecture
 
-┌──────────────────────────┐
-                           │  Advection-Diffusion PDE │
-                           └────────────┬─────────────┘
-                                        │
-                 ┌──────────────────────┴──────────────────────┐
-                 ▼                                             ▼
-   ┌───────────────────────────┐                 ┌───────────────────────────┐
-   │   Known Langmuir Kinetics │                 │  Learned Surface Dynamics │
-   │       (Precursor Phase)   │                 │     (Hidden State θ_b)    │
-   └─────────────┬─────────────┘                 └─────────────┬─────────────┘
-                 │                                             │
-                 └──────────────────────┬──────────────────────┘
-                                        ▼
-                           ┌──────────────────────────┐
-                           │   Total Reaction Rate    │
-                           │        R_predict         │
-                           └──────────────────────────┘
+graph TD
+    A[Advection-Diffusion PDE] --> B[Known Langmuir Kinetics<br/>Precursor Phase]
+    A --> C[Learned Surface Dynamics<br/>Hidden State θ_b]
+    B --> D[Total Reaction Rate<br/>R_predict]
+    C --> D
 
+
+    
 
 ## 🧮 Mathematical Formulation
 
@@ -81,35 +71,8 @@ ald_optimization/
 ├── 📂 docs/                     # Methodology & Theory Notes
 ├── 📄 environment.yml           # Conda Environment Setup
 └── 📄 README.md
-🚀 Quick Start
-1. Environment Setup
-Bash
-conda env create -f environment.yml
-conda activate ald-feml
-2. Run Baseline Simulation
-Bash
-python baseline/run_02_ideal_2d.py
-3. Train Missing Physics Model
-Bash
-python feml/train_missing_physics_standalone.py
-🛠 Tech Stack
-Category	Tools & Libraries
-PDE Solver	FEniCSx 0.11, PETSc
-Deep Learning	PyTorch
-Scientific Computing	NumPy, SciPy
-Visualization	Matplotlib, PyVista
-📜 License
-Distributed under the MIT License. See LICENSE for details.
 
 
----
-
-### ✨ 반영된 꾸미기 포인트
-1. **상단 배지(Badges):** Python, PyTorch, FEniCSx 버전을 깔끔하게 시각화.
-2. **ASCII 아키텍처 다이어그램:** 코드 구성 및 물리-AI 결합 구조를 한눈에 볼 수 있도록 배치.
-3. **LaTeX 수식:** $R_{\text{GT}}$ 및 $\hat{\Theta}_b$ 수식을 깔끔하게 정리.
-4. **트리 구조(Directory Tree):** 폴더와 파일 구조에 이모지를 곁들여 깔끔하게 정리.
-5. **테이블 스택 정돈:** 기술 스택을 표(Table)로 정리하여 가독성 확보.
 
 
 

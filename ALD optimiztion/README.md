@@ -28,12 +28,27 @@ This project builds a **Physics-Guided Digital Twin for Atomic Layer Deposition 
 
 ##  System Architecture
 
-graph TD
-    A[Advection-Diffusion PDE] --> B[Known Langmuir Kinetics<br/>Precursor Phase]
-    A --> C[Learned Surface Dynamics<br/>Hidden State θ_b]
-    B --> D[Total Reaction Rate<br/>R_predict]
-    C --> D
+                  ┌──────────────────────────────┐
+                  │   Advection-Diffusion PDE    │
+                  └──────────────┬───────────────┘
+                                 │
+         ┌───────────────────────┴───────────────────────┐
 
+         
+         ▼                                               ▼
+         
+┌─────────────────────────┐             ┌─────────────────────────┐
+│ Known Langmuir Kinetics │             │ Learned Surface Dynamics│
+│    (Precursor Phase)    │             │   (Hidden State θ_b)    │
+└────────────┬────────────┘             └────────────┬────────────┘
+             │                                       │
+             └───────────────────┬───────────────────┘
+                                 ▼
+                                 
+                  ┌──────────────────────────────┐
+                  │     Total Reaction Rate      │
+                  │          R_predict           │
+                  └──────────────────────────────┘
 
     
 
